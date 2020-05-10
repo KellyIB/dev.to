@@ -43,7 +43,7 @@ class StoriesController < ApplicationController
     # the elsif can find the article by slug (aka: title) it calls the method "handle_possible_redirect"(line 90, below), .decorate seems to call a decorate method add style to the @article for the view
     elsif (@article = Article.find_by(slug: params[:slug])&.decorate)
       handle_possible_redirect
-    # the else looks for a podcast with the slugs (username) and then by slug (title) and assigns each value to a variable for the view, then calls the method "handle_podcast_show"(line 203, below) - we won't need this?
+    # the else looks for a podcast with the slugs (for a podcast slug means "username") and then for a podcast episode, slug is the "title" of that episode) and assigns each value to a variable for the view, then calls the method "handle_podcast_show"(line 203, below) - we won't need this?
     else
       @podcast = Podcast.available.find_by!(slug: params[:username])
       @episode = PodcastEpisode.available.find_by!(slug: params[:slug])
@@ -229,6 +229,7 @@ class StoriesController < ApplicationController
     redirect_if_show_view_param
     return if performed?
 
+    # @article.tag_list will give us the tags we need to search for youtube videos.  Is it best to call a model method from the view? IDK
     render template: "articles/show"
   end
 
