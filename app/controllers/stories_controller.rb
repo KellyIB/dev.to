@@ -221,7 +221,7 @@ class StoriesController < ApplicationController
 
   # this method takes us to the articles/show view
   def handle_article_show
-    # "assign_article_show_variables" found on line 244
+    # "assign_article_show_variables" found on line 248
     assign_article_show_variables
     # a fastly-rails gem method, used for caching (docs: https://www.rubydoc.info/gems/fastly-rails/FastlyRails/SurrogateKeyHeaders)
     set_surrogate_key_header @article.record_key
@@ -229,7 +229,7 @@ class StoriesController < ApplicationController
     redirect_if_show_view_param
     return if performed?
 
-    # @article.tag_list will give us the tags we need to search for youtube videos.  Is it best to call a model method from the view? IDK
+    # @article.tag_list will give us the tags we need to search for youtube videos. Is it best to call a method from the view? IDK
     render template: "articles/show"
   end
 
