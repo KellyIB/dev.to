@@ -33,12 +33,17 @@ class StoriesController < ApplicationController
     render template: "articles/search"
   end
 
+  # this method takes us to the articles/show view
   def show
+    # @story_show looks like it's setting an instance variable for appearance?
     @story_show = true
+    # conditional using find_by - if it can find an article path with the username and the title(aka "slug") it calls on the method "handle_article_show" (line 222, below), .decorate seems to call a decorate method add style to the @article for the view
     if (@article = Article.find_by(path: "/#{params[:username].downcase}/#{params[:slug]}")&.decorate)
       handle_article_show
+    # the elsif can find the article by slug (aka: title) it calls the method "handle_possible_redirect"(line 90, below), .decorate seems to call a decorate method add style to the @article for the view
     elsif (@article = Article.find_by(slug: params[:slug])&.decorate)
       handle_possible_redirect
+    # the else looks for a podcast with the slugs (username) and then by slug (title) and assigns each value to a variable for the view, then calls the method "handle_podcast_show"(line 203, below) - we won't need this?
     else
       @podcast = Podcast.available.find_by!(slug: params[:username])
       @episode = PodcastEpisode.available.find_by!(slug: params[:slug])
@@ -214,9 +219,13 @@ class StoriesController < ApplicationController
     redirect_to "/internal/articles/#{@article.id}" if params[:view] == "moderate"
   end
 
+  # this method takes us to the articles/show view
   def handle_article_show
+    # "assign_article_show_variables" found on line 244
     assign_article_show_variables
+    # a fastly-rails gem method, used for caching (docs: https://www.rubydoc.info/gems/fastly-rails/FastlyRails/SurrogateKeyHeaders)
     set_surrogate_key_header @article.record_key
+    # "redirect_if_show_view_param" found on line 218
     redirect_if_show_view_param
     return if performed?
 
