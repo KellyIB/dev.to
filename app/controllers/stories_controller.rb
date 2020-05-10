@@ -87,6 +87,7 @@ class StoriesController < ApplicationController
     end
   end
 
+  # what is this redirct is doing....?
   def handle_possible_redirect
     potential_username = params[:username].tr("@", "").downcase
     @user = User.find_by("old_username = ? OR old_old_username = ?", potential_username, potential_username)
@@ -229,7 +230,7 @@ class StoriesController < ApplicationController
     redirect_if_show_view_param
     return if performed?
 
-    # @article.tag_list will give us the tags we need to search for youtube videos. Is it best to call a method from the view? IDK
+    # @article.tag_list will give us the tags we need to search for youtube videos. We could call on a new method here that creates a new facade for our youtube api call if we really didn't want to do it in the assign_article_show_variables method - need to ask group opinion don't think we need to use the videos for admin or internal articles show
     render template: "articles/show"
   end
 
@@ -246,10 +247,13 @@ class StoriesController < ApplicationController
   end
 
   def assign_article_show_variables
+    # look at all the variables. could we add our videos to display in this method? like @related_videos = "calls on new method in this controller that calls on a new facade to facilitate the api call to youtube with the @article.tag_list that returns and array of {% youtube cEhrb_Fe9v0 %}, etc ? or is that crazy?"
     @article_show = true
     @variant_number = params[:variant_version] || (user_signed_in? ? 0 : rand(2))
+    # calls method on line 265
     assign_user_and_org
     @comments_to_show_count = @article.cached_tag_list_array.include?("discuss") ? 50 : 30
+    # calls method on line 270
     assign_second_and_third_user
     not_found if permission_denied?
     @comment = Comment.new(body_markdown: @article&.comment_template)
