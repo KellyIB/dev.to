@@ -399,7 +399,7 @@ Rails.application.routes.draw do
   get "/:username/comment/:id_code/delete_confirm" => "comments#delete_confirm"
   get "/:username/comment/:id_code/mod" => "moderations#comment"
   get "/:username/comment/:id_code/settings", to: "comments#settings"
-
+  # here's a route to our stories#show method
   get "/:username/:slug/:view" => "stories#show",
       :constraints => { view: /moderate/ }
   get "/:username/:slug/mod" => "moderations#article"
@@ -409,6 +409,7 @@ Rails.application.routes.draw do
   get "/:username/:slug/stats" => "articles#stats"
   get "/:username/:view" => "stories#index",
       :constraints => { view: /comments|moderate|admin/ }
+  # here's a route to our stories#show method
   get "/:username/:slug" => "stories#show"
   get "/:username" => "stories#index"
 
