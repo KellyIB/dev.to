@@ -68,7 +68,7 @@
     <% end %>
   <% end %>
 <% end %>
-
+<!-- this is where our article is displayed -->
 <div class="home">
   <div
     class="container article"
@@ -160,6 +160,7 @@
         </h3>
         <% cache("main-article-tags-#{@article.cached_tag_list}", expires_in: 30.hours) do %>
           <div class="tags">
+            <!-- this is where the tag_list is displayed.  We could use the tag_list to search for relevant you tube videos? -->
             <% @article.cached_tag_list_array.each do |tag| %>
               <% tag_hash = tag_colors(tag) %>
               <a class="tag" href="/t/<%= tag %>" style="background-color:<%= tag_hash[:background] %>;color:<%= tag_hash[:color] %>">#<%= tag %></a>
@@ -184,8 +185,10 @@
       <% end %>
     <% end %>
     <%= render "articles/org_branding", organization: @organization %>
+    <!-- our videos could go here? -->
     <%= render "articles/full_comment_area" %>
   </div>
+  <!-- our videos could go here? -->
   <% cache("article-bottom-content-#{@article.id}", expires_in: 18.hours) do %>
     <% @classic_article = Suggester::Articles::Classic.new(@article, not_ids: [@article.id]).get.first %>
     <% if @classic_article %>
