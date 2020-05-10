@@ -7,7 +7,7 @@ class Article < ApplicationRecord
 
   acts_as_taggable_on :tags
   resourcify
-
+  # going to need this
   attr_accessor :publish_under_org
   attr_writer :series
 
