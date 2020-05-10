@@ -4,7 +4,7 @@ class Tag < ActsAsTaggableOn::Tag
   acts_as_followable
   resourcify
 
-  # going to need this
+  # going to need tags
 
   ALLOWED_CATEGORIES = %w[uncategorized language library tool site_mechanic location subcommunity].freeze
 
