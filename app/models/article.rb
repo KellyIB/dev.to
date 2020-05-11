@@ -381,6 +381,7 @@ class Article < ApplicationRecord
     ApplicationController.helpers.cloudinary(video_thumbnail_url, 880)
   end
 
+  # need this for the view
   def video_duration_in_minutes
     minutes = (video_duration_in_seconds.to_i / 60) % 60
     seconds = video_duration_in_seconds.to_i % 60
@@ -466,6 +467,7 @@ class Article < ApplicationRecord
     Articles::ScoreCalcWorker.perform_async(id)
   end
 
+  # look here - need something like this for view - find how it gets this
   def fetch_video_duration
     if video.present? && video_duration_in_seconds.zero?
       url = video_source_url.gsub(".m3u8", "1351620000001-200015_hls_v4.m3u8")
