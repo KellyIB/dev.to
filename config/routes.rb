@@ -409,6 +409,8 @@ Rails.application.routes.draw do
   get "/:username/:slug/stats" => "articles#stats"
   get "/:username/:view" => "stories#index",
       :constraints => { view: /comments|moderate|admin/ }
+  # this is the route that displays the article show page
+  # it points to the stories controller and its show method
   get "/:username/:slug" => "stories#show"
   get "/:username" => "stories#index"
 

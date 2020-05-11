@@ -1,6 +1,11 @@
 @import 'variables';
 @import 'mixins';
 
+// styling for the article show page goes here
+// h1.annotations {
+//   color: red;
+// }
+
 .stories-show {
   @include themeable(background, theme-background, $lightest-gray);
 }

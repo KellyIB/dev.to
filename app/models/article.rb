@@ -1,3 +1,5 @@
+# this is the Article model, properties of an article are defined here
+# we will probably need to add some sort of related_videos array here
 class Article < ApplicationRecord
   include CloudinaryHelper
   include ActionView::Helpers

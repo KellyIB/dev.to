@@ -1,3 +1,6 @@
+# this decorator is called in the stories controller
+# it adds additional properties to the article
+
 class ArticleDecorator < ApplicationDecorator
   def current_state_path
     published ? "/#{username}/#{slug}" : "/#{username}/#{slug}?preview=#{password}"

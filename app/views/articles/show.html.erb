@@ -69,6 +69,7 @@
   <% end %>
 <% end %>
 
+<!-- Our article begins here -->
 <div class="home">
   <div
     class="container article"
@@ -99,7 +100,10 @@
           </a>
         <% end %>
         <% if @article.video.present? %>
+        <!-- an example of the video_player partial being used -->
+        <!-- this is a single video that renders if the article is a video article -->
           <%= render "articles/video_player", meta_tags: true, article: @article %>
+        <!-- otherwise the main image is rendered at the top of the article instead -->
         <% elsif @article.main_image.present? %>
           <div class="image image-final" style="background-color:<%= @article.main_image_background_hex_color %>;background-image:url(<%= cloud_cover_url(@article.main_image) %>)">
           </div>
@@ -177,12 +181,16 @@
         <%= render "articles/collection", position: "bottom" %>
       <% end %>
       <%= render "articles/actions" %>
+      <!-- the actual article ends here -->
+      <!-- related videos could go here -->
     </article>
     <% if @article.body_markdown && @article.body_markdown.size > 900 %>
       <% cache("article-about-author-#{@user.id}-#{@user.updated_at}", expires_in: 100.hours) do %>
         <%= render "articles/about_author" %>
       <% end %>
     <% end %>
+    <!-- <h1 class='annotations'>Related Videos</h1> -->
+    <!-- the related videos could also go here, after the about the author section -->
     <%= render "articles/org_branding", organization: @organization %>
     <%= render "articles/full_comment_area" %>
   </div>

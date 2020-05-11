@@ -33,12 +33,17 @@ class StoriesController < ApplicationController
     render template: "articles/search"
   end
 
+  # this is the method being called when navigating to an article
   def show
+    # this appears to be used in a helper file that sets a view_class property
     @story_show = true
+    # some conditional logic to look up an article in the database and assign it to @article
     if (@article = Article.find_by(path: "/#{params[:username].downcase}/#{params[:slug]}")&.decorate)
       handle_article_show
+    # otherwise it tries to handle a redirect instead
     elsif (@article = Article.find_by(slug: params[:slug])&.decorate)
       handle_possible_redirect
+    # more conditional logic to render a podcast article instead of a normal article
     else
       @podcast = Podcast.available.find_by!(slug: params[:username])
       @episode = PodcastEpisode.available.find_by!(slug: params[:slug])
@@ -214,12 +219,15 @@ class StoriesController < ApplicationController
     redirect_to "/internal/articles/#{@article.id}" if params[:view] == "moderate"
   end
 
+  # this function renders our article show page view
   def handle_article_show
+    # seems to be some housekeeping helper functions
     assign_article_show_variables
     set_surrogate_key_header @article.record_key
     redirect_if_show_view_param
     return if performed?
 
+    # tells it to look for a show.html.erb inside the articles view folder
     render template: "articles/show"
   end
 

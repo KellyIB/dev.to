@@ -1,5 +1,8 @@
+<!-- this is an existing partial (similar to a component) for displaying videos -->
+<!-- we can probably re-use this for our own purposes -->
 <div itemscope itemtype="http://schema.org/VideoObject" class="video-player-header">
   <% if meta_tags %>
+  <!-- optional meta-tags that help with SEO -->
     <meta itemprop="uploadDate" content="<%= article.published_at %>" />
     <meta itemprop="name" content="<%= article.title %>" />
     <meta itemprop="description" content="<%= article.description %>" />
@@ -9,6 +12,8 @@
     <meta itemprop="duration" content="<%= format("PT%<minutes>sM%<seconds>sS", minutes: minutes, seconds: seconds) %>" />
     <div id="video-player-source" data-source="<%= article.video_source_url %>"></div>
   <% end %>
+  <!-- this video player utilizes a service called JWPlayer -->
+  <!-- docs found here: https://support.jwplayer.com/topics/player -->
   <script src="//content.jwplatform.com/libraries/b1zWy2iv.js" async></script>
   <div id="video-player-<%= article.id %>" class="video-player"></div>
 </div>
@@ -36,6 +41,8 @@
     }
   }
 
+  // this creates an instance of the JWPlayer object
+  // which then inserts into the div created above
   var waitingOnJWP<%= article.id %> = setInterval(function () {
     if (typeof jwplayer !== 'undefined') {
       clearInterval(waitingOnJWP<%= article.id %>);
