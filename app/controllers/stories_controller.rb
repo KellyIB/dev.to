@@ -214,6 +214,11 @@ class StoriesController < ApplicationController
     redirect_to "/internal/articles/#{@article.id}" if params[:view] == "moderate"
   end
 
+  # The data goes through this and @article can be called here.  We can either add additional methods
+  # here for the related videos attribute but it is determined by what path we decide to go down.
+  # There are multiple methods that we could piggy back off of but that could potential clog up the controller
+  # with methods that would be better suited else where.
+
   def handle_article_show
     assign_article_show_variables
     set_surrogate_key_header @article.record_key

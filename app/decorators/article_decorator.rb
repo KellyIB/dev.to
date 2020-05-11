@@ -1,4 +1,9 @@
 class ArticleDecorator < ApplicationDecorator
+  # This is what I belive to be a facade basically.  Here we can added a method that would return a YOUTUBE
+  # API response based on the Title and the cached_tag_list_array.
+  # The API service could be designed with returning the new videos that match or the
+  # closest match.  To prevent API's for everytime a video is shown they could be cached for a certain time from
+
   def current_state_path
     published ? "/#{username}/#{slug}" : "/#{username}/#{slug}?preview=#{password}"
   end
