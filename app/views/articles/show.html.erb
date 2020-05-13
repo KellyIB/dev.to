@@ -184,6 +184,8 @@
       <% end %>
     <% end %>
     <%= render "articles/org_branding", organization: @organization %>
+    <div id="videos-container" data-videos="<%= %w[pPy0GQJLZUM okMVc3-aCKQ video3].to_json %>"></div>
+    <%= javascript_pack_tag "relatedVideos", defer: true %>
     <%= render "articles/full_comment_area" %>
   </div>
   <% cache("article-bottom-content-#{@article.id}", expires_in: 18.hours) do %>
