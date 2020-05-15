@@ -10,7 +10,7 @@ class YouTubeService
 
   def self.video_info(tags)
     retrieve_videos(tags)[:items].each_with_object({}) do |video, acc|
-      acc[video[:id][:videoId]] = { url: "www.youtube.com/watch?v=#{video[:id][:videoId]}",
+      acc[video[:id][:videoId]] = { videoId: video[:id][:videoId],
                                     title: video[:snippet][:title],
                                     description: video[:snippet][:description],
                                     thumbnail: video[:snippet][:thumbnails][:default][:url],
