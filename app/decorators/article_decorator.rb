@@ -53,10 +53,6 @@ class ArticleDecorator < ApplicationDecorator
     published_at.to_i
   end
 
-  def related_videos
-    YouTubeService.video_info(cached_tag_list_array)
-  end
-
   def description_and_tags
     modified_description = description.strip
     modified_description += "." unless description.end_with?(".")
