@@ -14,7 +14,7 @@ RSpec.describe YouTubeService, type: :service do
     tag_list = %w[ruby coding testing]
     response = described_class.video_info(tag_list)
     expect(response.length).to eq(3)
-    expect(response.values[0]).to have_key(:url)
+    expect(response.values[0]).to have_key(:videoId)
     expect(response.values[0]).to have_key(:title)
     expect(response.values[0]).to have_key(:description)
     expect(response.values[0]).to have_key(:thumbnail)
