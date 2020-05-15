@@ -220,6 +220,9 @@ class StoriesController < ApplicationController
     redirect_if_show_view_param
     return if performed?
 
+    Rails.cache.fetch("#{@article.id}-related-vidoes", expires_in: 12.hours) do
+      @related_videos = YouTubeService.video_info(@article.cached_tag_list_array)
+    end
     render template: "articles/show"
   end
 
