@@ -89,22 +89,94 @@ Rails.logger.info "4. Creating #{num_articles} Articles"
 
 Article.clear_index!
 
-num_articles.times do |i|
-  tags = []
+# num_articles.times do |i|
+#   tags = []
+#   tags << "discuss" if (i % 3).zero?
+#   tags.concat Tag.order(Arel.sql("RANDOM()")).limit(3).pluck(:name)
+
+#   markdown = <<~MARKDOWN
+#     ---
+#     title:  #{Faker::Book.title} #{Faker::Lorem.sentence(word_count: 2).chomp('.')}
+#     published: true
+#     cover_image: #{Faker::Company.logo}
+#     tags: #{tags.join(', ')}
+#     ---
+
+#     #{Faker::Hipster.paragraph(sentence_count: 2)}
+#     #{Faker::Markdown.random}
+#     #{Faker::Hipster.paragraph(sentence_count: 2)}
+#   MARKDOWN
+
+#   Article.create!(
+#     body_markdown: markdown,
+#     featured: true,
+#     show_comments: true,
+#     user_id: User.order(Arel.sql("RANDOM()")).first.id,
+#   )
+# end
+
+1.times do |i|
+  tags = %w[ruby coding testing]
   tags << "discuss" if (i % 3).zero?
-  tags.concat Tag.order(Arel.sql("RANDOM()")).limit(3).pluck(:name)
 
   markdown = <<~MARKDOWN
     ---
-    title:  #{Faker::Book.title} #{Faker::Lorem.sentence(word_count: 2).chomp('.')}
+    title:  Ruby on Rails — Testing and code quality (part 4)
     published: true
     cover_image: #{Faker::Company.logo}
     tags: #{tags.join(', ')}
     ---
 
-    #{Faker::Hipster.paragraph(sentence_count: 2)}
-    #{Faker::Markdown.random}
-    #{Faker::Hipster.paragraph(sentence_count: 2)}
+    When it comes to unit testing, the more popular ones are MiniTest and RSpec. The first one is now included in Rails as the default framework for tests, so we don’t have to set up anything. However, a lot of people still prefer to work with RSpec, because not only it is compatible with all the other test-related gems, but it also lets us to have tests more readable due to being a Domain Specific Language. Furthermore, on these days, RSpec has a lot of documentation and examples through the web.
+
+  MARKDOWN
+
+  Article.create!(
+    body_markdown: markdown,
+    featured: true,
+    show_comments: true,
+    user_id: User.order(Arel.sql("RANDOM()")).first.id,
+  )
+end
+
+1.times do |i|
+  tags = %w[ruby career webdev]
+  tags << "discuss" if (i % 3).zero?
+
+  markdown = <<~MARKDOWN
+    ---
+    title:  Is Ruby worth learning in 2019?
+    published: true
+    cover_image: #{Faker::Company.logo}
+    tags: #{tags.join(', ')}
+    ---
+
+    Secondly, Ruby on Rails (RoR) is one of the earliest backend web frameworks to hit the scene in late 2005. Despite its OG status, it seems to be falling off the popularity chart. Does that mean you should avoid it, along with the language that was used to build the framework?
+
+  MARKDOWN
+
+  Article.create!(
+    body_markdown: markdown,
+    featured: true,
+    show_comments: true,
+    user_id: User.order(Arel.sql("RANDOM()")).first.id,
+  )
+end
+
+1.times do |i|
+  tags = %w[python ruby career]
+  tags << "discuss" if (i % 3).zero?
+
+  markdown = <<~MARKDOWN
+    ---
+    title:  Should You Learn Python, C, or Ruby to Be a Top Coder?
+    published: true
+    cover_image: #{Faker::Company.logo}
+    tags: #{tags.join(', ')}
+    ---
+
+    Top coders have near limitless prospects when it comes to employment, or even opportunities to succeed in their own startups. In fact, learning to code is fast becoming a necessary life skill, with millions each year taking online and in-person courses to learn Python, Java, and other popular programming languages.
+
   MARKDOWN
 
   Article.create!(
