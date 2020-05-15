@@ -175,12 +175,4 @@ RSpec.describe ArticleDecorator, type: :decorator do
       expect(created_article.description_and_tags).to eq("#{parsed_post_by_string} Tagged with heytag.")
     end
   end
-
-  describe "related_videos" do
-    it "creates a hash from youtube api and cached_tag_list_array" do
-      body_markdown = "---\ntitle: Title\npublished: false\ndescription:\ntags: ruby, coding, testing\n---\n\n"
-      created_article = create_article(body_markdown: body_markdown)
-      expect(created_article.related_videos.class).to eq(Hash)
-    end
-  end
 end
